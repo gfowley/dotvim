@@ -1,4 +1,5 @@
 execute pathogen#infect()
+" cd ~/.vim/bundle ; git submodule foreach git pull origin master
 
 set nocompatible
 set encoding=utf-8
