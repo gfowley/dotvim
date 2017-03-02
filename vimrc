@@ -73,7 +73,7 @@ let ruby_operators = 1
 " color scheme
 set t_Co=256
 colors zenburn
-" let g:zenburn_high_Contrast = 1
+let g:zenburn_high_Contrast = 1
 " let g:zenburn_disable_Label_underline = 0
 " let g:zenburn_transparent = 0
 " let g:zenburn_old_Visual = 1
