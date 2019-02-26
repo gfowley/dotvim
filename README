@@ -18,6 +18,10 @@ To install more vim plugins (DO NOT USE git clone...!!)
     cd ~/.vim/bundle
     git submodule add <url>
 
+To update submodules:
+
+  git submodule update --remote --merge
+
 To update repo
 
     cd ~/.vim

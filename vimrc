@@ -100,6 +100,11 @@ let g:tagbar_autofocus = 1
 let g:tagbar_autoshowtag = 1
 "highlight TagbarHighLight ctermfg=black ctermbg=darkyellow
 
+" tags for rvm current ruby stdlib
+autocmd FileType ruby 
+			\ let &tags .= "," . $MY_RUBY_HOME . "/lib/tags" |
+			\ let &path .= "," . $MY_RUBY_HOME . "/lib"
+
 " ag
 let g:ag_prg="ag --column --nogroup --noheading --nobreak"
 let g:ag_qhandler="rightbelow copen"
@@ -114,10 +119,6 @@ augroup XML
   autocmd!
   autocmd FileType xml setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
 augroup END
-
-" vim-easy-align
-vmap <Enter> <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 
 " buffers on tabline
 set hidden
@@ -175,8 +176,10 @@ nnoremap <Leader>s :set scrollbind!<CR>:set cursorbind!<CR>
 " Krack line (opposite of Join) keep cursor on same line and column
 nnoremap K i<CR><Esc>k$hl
 
-" easy-align visual mode
+" vim-easy-align
+vmap <Enter> <Plug>(EasyAlign)
 vmap <TAB> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " splitjoin blocks
 nnoremap <leader>j :SplitjoinJoin<CR>
@@ -213,15 +216,21 @@ map <Leader>tn :call RunNearestSpec()<CR>
 map <Leader>tl :call RunLastSpec()<CR>
 map <Leader>ta :call RunAllSpecs()<CR>
 
+" Dispatch + Rspec
+let g:rspec_command = "Dispatch rspec {spec}"
+
 " Enable seeing-is-believing mappings only for Ruby
 augroup seeingIsBelievingSettings
   autocmd!
-  " autocmd FileType ruby nmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
-  " autocmd FileType ruby xmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
-  autocmd FileType ruby nmap <buffer> <leader>em <Plug>(seeing-is-believing-mark)
-  autocmd FileType ruby xmap <buffer> <leader>em <Plug>(seeing-is-believing-mark)
+  autocmd FileType ruby nmap <buffer> <leader>emr <Plug>(seeing-is-believing-mark-and-run)
+  autocmd FileType ruby xmap <buffer> <leader>emr <Plug>(seeing-is-believing-mark-and-run)
+  autocmd FileType ruby nmap <buffer> <leader>em  <Plug>(seeing-is-believing-mark)
+  autocmd FileType ruby xmap <buffer> <leader>em  <Plug>(seeing-is-believing-mark)
+  autocmd FileType ruby nmap <buffer> <leader>er  <Plug>(seeing-is-believing-run)
   " autocmd FileType ruby imap <buffer> <F4> <Plug>(seeing-is-believing-mark)
-  autocmd FileType ruby nmap <buffer> <leader>er <Plug>(seeing-is-believing-run)
   " autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing-is-believing-run)
 augroup END
+
+" FIX: this is supposed to prevent mutliple reloads by webpack-dev-server file watcher while editing before file save
+set backupcopy=yes
 
